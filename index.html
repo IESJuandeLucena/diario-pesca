@@ -1,46 +1,43 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Diario de Pesca 🎣</title>
-
-<!-- CSS -->
-<link rel="stylesheet" href="style2.css">
-
+    <meta charset="UTF-8">
+    <title>Diario de Pesca</title>
+    <link rel="stylesheet" href="style2.css">
 </head>
-
 <body>
 
-<header>
-  <h1>🎣 Diario de Pesca</h1>
-  <p>Registra tus jornadas y capturas</p>
-</header>
+<div class="app">
+    <h1>🎣 Diario de Pesca</h1>
 
-<main class="container">
+    <form id="formCaptura">
+        <label>Fecha</label>
+        <input type="date" id="fecha" required>
 
-  <!-- FORMULARIO -->
-  <section class="card">
-    <h2>➕ Nueva jornada</h2>
+        <label>Lugar</label>
+        <input type="text" id="lugar" placeholder="Ej: Río Ebro" required>
 
-    <input id="fecha" type="date">
-    <input id="lugar" placeholder="Lugar de pesca">
-    <input id="pez" placeholder="Tipo de pez">
-    <input id="cebo" placeholder="Cebo usado">
-    <input id="clima" placeholder="Clima">
-    <input id="tamano" placeholder="Tamaño / peso del pez">
+        <label>Especie</label>
+        <input type="text" id="especie" placeholder="Ej: Trucha" required>
 
-    <button onclick="guardarPesca()">Guardar jornada</button>
-  </section>
+        <label>Peso (kg)</label>
+        <input type="number" id="peso" step="0.1" required>
 
-  <!-- HISTORIAL -->
-  <section class="card">
-    <h2>📋 Historial</h2>
-    <div id="lista"></div>
-  </section>
+        <label>Clima</label>
+        <input type="text" id="clima" placeholder="Ej: Soleado">
 
-</main>
+        <label>Foto de la captura</label>
+        <input type="file" id="foto" accept="image/*">
 
-<!-- JS -->
+        <button type="submit">Guardar captura</button>
+    </form>
+
+    <h2>📒 Registros</h2>
+    <div id="listaCapturas"></div>
+</div>
+
 <script src="app2.js"></script>
 </body>
 </html>
+
+
