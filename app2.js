@@ -1,54 +1,65 @@
-let pescas = JSON.parse(localStorage.getItem("pescas")) || [];
+const form = document.getElementById("formCaptura");
+const lista = document.getElementById("listaCapturas");
+const fotoInput = document.getElementById("foto");
 
-function guardarPesca(){
-    const data = {
-        fecha: fecha.value,
-        lugar: lugar.value,
-        pez: pez.value,
-        cebo: cebo.value,
-        clima: clima.value,
-        tamano: tamano.value
-    };
+let capturas = JSON.parse(localStorage.getItem("capturas")) || [];
 
-    pescas.push(data);
-    localStorage.setItem("pescas", JSON.stringify(pescas));
+form.addEventListener("submit", function(e) {
+    e.preventDefault();
 
-    limpiar();
-    render();
+    const fecha = document.getElementById("fecha").value;
+    const lugar = document.getElementById("lugar").value;
+    const especie = document.getElementById("especie").value;
+    const peso = document.getElementById("peso").value;
+    const clima = document.getElementById("clima").value;
+
+    let fotoBase64 = "";
+
+    if (fotoInput.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            fotoBase64 = e.target.result;
+
+            guardarCaptura(fecha, lugar, especie, peso, clima, fotoBase64);
+        };
+        reader.readAsDataURL(fotoInput.files[0]);
+    } else {
+        guardarCaptura(fecha, lugar, especie, peso, clima, null);
+    }
+});
+
+function guardarCaptura(fecha, lugar, especie, peso, clima, foto) {
+    const captura = { fecha, lugar, especie, peso, clima, foto };
+    capturas.push(captura);
+    localStorage.setItem("capturas", JSON.stringify(capturas));
+    mostrarCapturas();
+    form.reset();
 }
 
-function limpiar(){
-    fecha.value="";
-    lugar.value="";
-    pez.value="";
-    cebo.value="";
-    clima.value="";
-    tamano.value="";
-}
+function mostrarCapturas() {
+    lista.innerHTML = "";
 
-function render(){
-    lista.innerHTML="";
-    pescas.forEach((p,index)=>{
-        const div = document.createElement("div");
-        div.className="item";
-        div.innerHTML=`
-            <strong>${p.pez}</strong>
-            <small>📍 ${p.lugar}</small>
-            <small>📅 ${p.fecha}</small>
-            <small>🎯 Cebo: ${p.cebo}</small>
-            <small>☁️ Clima: ${p.clima}</small>
-            <small>📏 Tamaño: ${p.tamano}</small>
-            <button class="deleteBtn" onclick="borrarPesca(${index})">🗑️ Borrar</button>
+    capturas.forEach(captura => {
+        const card = document.createElement("div");
+        card.classList.add("captura");
+
+        card.innerHTML = `
+            <strong>📅 Fecha:</strong> ${captura.fecha}<br>
+            <strong>📍 Lugar:</strong> ${captura.lugar}<br>
+            <strong>🐟 Especie:</strong> ${captura.especie}<br>
+            <strong>⚖️ Peso:</strong> ${captura.peso} kg<br>
+            <strong>🌤 Clima:</strong> ${captura.clima}
         `;
-        lista.appendChild(div);
+
+        if (captura.foto) {
+            const img = document.createElement("img");
+            img.src = captura.foto;
+            img.classList.add("foto-captura");
+            card.appendChild(img);
+        }
+
+        lista.appendChild(card);
     });
 }
 
-
-function borrarPesca(index){
-    if(confirm("¿Seguro que quieres borrar esta jornada?")){
-        pescas.splice(index,1);
-        localStorage.setItem("pescas", JSON.stringify(pescas));
-        render();
-    }
-}
+mostrarCapturas();
