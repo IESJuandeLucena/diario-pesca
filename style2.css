@@ -1,0 +1,103 @@
+*{
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+    margin:0;
+    background: linear-gradient(120deg,#1e3c72,#2a5298);
+    min-height:100vh;
+    color:#333;
+}
+
+header{
+    text-align:center;
+    color:white;
+    padding:30px 10px;
+}
+
+header h1{
+    margin:0;
+    font-size:2.5em;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:20px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.card h2{
+    margin-top:0;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin:6px 0;
+    border-radius:6px;
+    border:1px solid #ccc;
+    font-size:14px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border:none;
+    border-radius:8px;
+    background:#1e90ff;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+button:hover{
+    background:#0b5ed7;
+}
+
+.item{
+    background:#f2f6ff;
+    border-left:5px solid #1e90ff;
+    padding:10px;
+    margin:8px 0;
+    border-radius:6px;
+}
+
+.item small{
+    color:#666;
+    display:block;
+}
+
+@media(max-width:700px){
+    .container{
+        grid-template-columns:1fr;
+    }
+}
+
+.deleteBtn{
+    margin-top:8px;
+    background:#e63946;
+    color:white;
+    border:none;
+    padding:6px 10px;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:13px;
+}
+
+.deleteBtn:hover{
+    background:#c1121f;
+}
+

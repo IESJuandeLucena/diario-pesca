@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Diario de Pesca 🎣</title>
+
+<!-- CSS -->
+<link rel="stylesheet" href="style2.css">
+
+</head>
+
+<body>
+
+<header>
+  <h1>🎣 Diario de Pesca</h1>
+  <p>Registra tus jornadas y capturas</p>
+</header>
+
+<main class="container">
+
+  <!-- FORMULARIO -->
+  <section class="card">
+    <h2>➕ Nueva jornada</h2>
+
+    <input id="fecha" type="date">
+    <input id="lugar" placeholder="Lugar de pesca">
+    <input id="pez" placeholder="Tipo de pez">
+    <input id="cebo" placeholder="Cebo usado">
+    <input id="clima" placeholder="Clima">
+    <input id="tamano" placeholder="Tamaño / peso del pez">
+
+    <button onclick="guardarPesca()">Guardar jornada</button>
+  </section>
+
+  <!-- HISTORIAL -->
+  <section class="card">
+    <h2>📋 Historial</h2>
+    <div id="lista"></div>
+  </section>
+
+</main>
+
+<!-- JS -->
+<script src="app2.js"></script>
+</body>
+</html>
