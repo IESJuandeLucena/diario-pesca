@@ -13,14 +13,10 @@ form.addEventListener("submit", function(e) {
     const peso = document.getElementById("peso").value;
     const clima = document.getElementById("clima").value;
 
-    let fotoBase64 = "";
-
     if (fotoInput.files[0]) {
         const reader = new FileReader();
         reader.onload = function(e) {
-            fotoBase64 = e.target.result;
-
-            guardarCaptura(fecha, lugar, especie, peso, clima, fotoBase64);
+            guardarCaptura(fecha, lugar, especie, peso, clima, e.target.result);
         };
         reader.readAsDataURL(fotoInput.files[0]);
     } else {
@@ -39,7 +35,7 @@ function guardarCaptura(fecha, lugar, especie, peso, clima, foto) {
 function mostrarCapturas() {
     lista.innerHTML = "";
 
-    capturas.forEach(captura => {
+    capturas.forEach((captura, index) => {
         const card = document.createElement("div");
         card.classList.add("captura");
 
@@ -58,6 +54,17 @@ function mostrarCapturas() {
             card.appendChild(img);
         }
 
+        const btn = document.createElement("button");
+        btn.textContent = "🗑 Borrar registro";
+        btn.classList.add("btn-borrar");
+
+        btn.onclick = () => {
+            capturas.splice(index, 1);
+            localStorage.setItem("capturas", JSON.stringify(capturas));
+            mostrarCapturas();
+        };
+
+        card.appendChild(btn);
         lista.appendChild(card);
     });
 }
