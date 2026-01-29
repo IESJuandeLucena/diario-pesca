@@ -79,6 +79,21 @@ button:hover {
     border: 2px solid #2b7a78;
     background: #000; 
 }
+.btn-borrar {
+    margin-top: 10px;
+    background: #c0392b;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+}
+.btn-borrar:hover {
+    background: #e74c3c;
+}
+
+
 
 
 
